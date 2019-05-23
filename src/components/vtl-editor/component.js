@@ -1,50 +1,31 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import MonacoEditor from 'react-monaco-editor';
+import React, { useState } from 'react';
+import antlr4 from 'antlr4';
+import { VtlLexer, VtlParser, SimpleErrorListener } from '../../utils/parsing';
+import MonacoEditor from './monaco-editor';
 
-class VtlEditor extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			value: '',
-		};
-		this.onChange = value => this.setState({ value });
-		this.editorDidMount = editor => {
-			const { focus } = props;
-			focus && editor.focus();
-		};
-	}
-
-	render() {
-		const { value } = this.state;
-		const { theme } = this.props;
-		const options = {
-			selectOnLineNumbers: true,
-		};
-		return (
-			<div className="vtl-editor">
-				<MonacoEditor
-					height="400"
-					language="javascript"
-					theme={theme}
-					value={value}
-					options={options}
-					onChange={this.onChange}
-					editorDidMount={this.editorDidMount}
-				/>
-			</div>
-		);
-	}
-}
-
-VtlEditor.propTypes = {
-	focus: PropTypes.bool,
-	theme: PropTypes.string,
+const parse = text => {
+	const errors = [];
+	const chars = new antlr4.InputStream(text);
+	const lexer = new VtlLexer(chars);
+	const tokens = new antlr4.CommonTokenStream(lexer);
+	const parser = new VtlParser(tokens);
+	parser.buildParseTrees = true;
+	const listener = new SimpleErrorListener(errors);
+	parser.removeErrorListeners();
+	parser.addErrorListener(listener);
+	parser.start();
+	return errors;
 };
 
-VtlEditor.defaultProps = {
-	focus: false,
-	theme: 'vs-dark',
+const Editor = props => {
+	const [errors, setErrors] = useState([]);
+	return (
+		<MonacoEditor
+			errors={errors}
+			handleErrors={text => setErrors(parse(text))}
+			{...props}
+		/>
+	);
 };
 
-export default VtlEditor;
+export default Editor;
