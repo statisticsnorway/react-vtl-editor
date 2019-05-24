@@ -29,5 +29,11 @@ export default {
 		}),
 		commonjs(),
 	],
-	external: ['react', 'react-dom', 'prop-types'],
+	external: [
+		'react',
+		'react-dom',
+		'prop-types',
+		'react-monaco-editor',
+		'antlr4',
+	],
 };
