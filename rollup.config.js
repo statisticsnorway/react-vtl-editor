@@ -23,13 +23,14 @@ export default {
 		postcss(),
 		babel({
 			exclude: 'node_modules/**',
+			include: 'node_modules/antlr4/**',
 			plugins: ['external-helpers'],
 		}),
 		replace({
 			exclude: 'node_modules/**',
 			ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
 		}),
-		commonjs({ include: 'node_modules/antlr4/' }),
+		commonjs(),
 	],
 	external: [
 		'react',
