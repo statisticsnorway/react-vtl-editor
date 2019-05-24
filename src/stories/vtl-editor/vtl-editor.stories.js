@@ -6,6 +6,11 @@ import readme from './README.md';
 import titleDecorator from 'utils/decorator/title-decorator';
 import { select, boolean } from '@storybook/addon-knobs/react';
 
+const grammars = {
+	'vtl-2.0': 'vtl-2.0',
+	'vtl-2.0-istat': 'vtl-2.0-istat',
+	'vtl-1.1-hadrien-kohl': 'vtl-1.1-hadrien-kohl',
+};
 const themes = {
 	'vs-dark': 'vs-dark',
 	'vs-light': 'vs-light',
@@ -26,6 +31,7 @@ stories.addWithJSX('Default', () => (
 
 stories.addWithJSX('Props', () => (
 	<VtlEditor
+		grammar={select('Grammar', grammars, 'vtl-2.0')}
 		focus={boolean('Focus', false)}
 		theme={select('Theme', themes, 'vs-dark')}
 		handleValue={handleValue}

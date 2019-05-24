@@ -1,27 +1,13 @@
 import React, { useState } from 'react';
-import antlr4 from 'antlr4';
-import { VtlLexer, VtlParser, SimpleErrorListener } from '../../utils/parsing';
+import PropTypes from 'prop-types';
+import { getErrors } from '../../utils/parsing';
 import MonacoEditor from './monaco-editor';
-
-const parse = text => {
-	const errors = [];
-	const chars = new antlr4.InputStream(text);
-	const lexer = new VtlLexer(chars);
-	const tokens = new antlr4.CommonTokenStream(lexer);
-	const parser = new VtlParser(tokens);
-	parser.buildParseTrees = true;
-	const listener = new SimpleErrorListener(errors);
-	parser.removeErrorListeners();
-	parser.addErrorListener(listener);
-	parser.start();
-	return errors;
-};
 
 const Editor = props => {
 	const [errors, setErrors] = useState([]);
 	const handleErrors = value => {
-		const { handleValue, handleValid } = props;
-		const newErrors = parse(value);
+		const { grammar, handleValue, handleValid } = props;
+		const newErrors = getErrors(grammar)(value);
 		handleValue(value);
 		handleValid(newErrors.length === 0);
 		setErrors(newErrors);
@@ -29,6 +15,18 @@ const Editor = props => {
 	return (
 		<MonacoEditor errors={errors} handleErrors={handleErrors} {...props} />
 	);
+};
+
+Editor.propTypes = {
+	value: PropTypes.string,
+	grammar: PropTypes.string,
+	handleValid: PropTypes.func.isRequired,
+	handleValue: PropTypes.func.isRequired,
+};
+
+Editor.defaultValue = {
+	value: '',
+	grammar: 'vtl-2.0',
 };
 
 export default Editor;
