@@ -6,7 +6,7 @@ class VtlEditor extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			value: '',
+			value: props.value,
 		};
 		this.onChange = value => {
 			const { handleErrors } = props;
@@ -57,11 +57,13 @@ class VtlEditor extends Component {
 }
 
 VtlEditor.propTypes = {
+	value: PropTypes.string,
 	focus: PropTypes.bool,
 	theme: PropTypes.string,
 };
 
 VtlEditor.defaultProps = {
+	value: '',
 	focus: false,
 	theme: 'vs-dark',
 };

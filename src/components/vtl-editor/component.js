@@ -19,12 +19,15 @@ const parse = text => {
 
 const Editor = props => {
 	const [errors, setErrors] = useState([]);
+	const handleErrors = value => {
+		const { handleValue, handleValid } = props;
+		const newErrors = parse(value);
+		handleValue(value);
+		handleValid(newErrors.length === 0);
+		setErrors(newErrors);
+	};
 	return (
-		<MonacoEditor
-			errors={errors}
-			handleErrors={text => setErrors(parse(text))}
-			{...props}
-		/>
+		<MonacoEditor errors={errors} handleErrors={handleErrors} {...props} />
 	);
 };
 
