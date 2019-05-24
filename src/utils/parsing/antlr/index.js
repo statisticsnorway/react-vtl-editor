@@ -1,4 +1,2 @@
-export { VtlLexer } from './VtlLexer';
-export { VtlParser } from './VtlParser';
-export { VtlListener } from './VtlListener';
-export { VtlVisitor } from './VtlVisitor';
+export { default as VtlLexer } from './VtlLexer';
+export { default as VtlParser } from './VtlParser';
