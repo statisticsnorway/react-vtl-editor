@@ -4,6 +4,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import replace from 'rollup-plugin-replace';
 import postcss from 'rollup-plugin-postcss';
+import autoExternal from 'rollup-plugin-auto-external';
 
 export default {
 	input: 'src/components/index.js',
@@ -23,7 +24,6 @@ export default {
 		postcss(),
 		babel({
 			exclude: 'node_modules/**',
-			include: 'node_modules/antlr4/**',
 			plugins: ['external-helpers'],
 		}),
 		replace({
@@ -31,12 +31,6 @@ export default {
 			ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
 		}),
 		commonjs(),
-	],
-	external: [
-		'react',
-		'react-dom',
-		'prop-types',
-		'react-monaco-editor',
-		'antlr4',
+		autoExternal(),
 	],
 };
