@@ -1,5 +1,4 @@
 import babel from 'rollup-plugin-babel';
-import globals from 'rollup-plugin-node-globals';
 import builtins from 'rollup-plugin-node-builtins';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
@@ -20,7 +19,6 @@ export default {
 	},
 	plugins: [
 		builtins(),
-		globals(),
 		resolve(),
 		postcss(),
 		babel({
@@ -31,7 +29,7 @@ export default {
 			exclude: 'node_modules/**',
 			ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
 		}),
-		commonjs(),
+		commonjs({ include: 'node_modules/antlr4/' }),
 	],
 	external: [
 		'react',
