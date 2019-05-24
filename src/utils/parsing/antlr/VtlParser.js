@@ -1,8 +1,8 @@
 // Generated from fr\insee\vtl\Vtl.g4 by ANTLR 4.7.2
 // jshint ignore: start
-var antlr4 = require('antlr4/index');
-var VtlListener = require('./VtlListener').VtlListener;
-var VtlVisitor = require('./VtlVisitor').VtlVisitor;
+import antlr4 from 'antlr4';
+import VtlListener from './VtlListener';
+import VtlVisitor from './VtlVisitor';
 
 var grammarFileName = 'Vtl.g4';
 
