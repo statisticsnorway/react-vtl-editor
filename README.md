@@ -32,5 +32,5 @@ export default MyComponent;
 
 ## Todo
 
-- update `Rollup` configuration to display tooltip
+- update `Rollup` configuration to display tooltip (https://github.com/react-monaco-editor/react-monaco-editor/issues/210)
 - work on UI customization of the component
