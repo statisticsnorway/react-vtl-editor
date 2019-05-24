@@ -1,5 +1,6 @@
 {
 	"presets": [["env", { "modules": false }], "react"],
+	"compact": true,
 	"plugins": ["transform-class-properties", "transform-object-rest-spread"],
 	"env": {
 		"test": {
