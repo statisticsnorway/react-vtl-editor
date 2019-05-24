@@ -22,8 +22,6 @@ class VtlEditor extends Component {
 		this.updateMarkers = markers => {
 			let monaco = this.monacoRef;
 			let editor = this.editorRef;
-			// https://microsoft.github.io/monaco-editor/api/modules/monaco.editor.html#setmodelmarkers
-			// https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.imarkerdata.html
 			monaco.editor.setModelMarkers(editor.getModel(), 'test', markers);
 		};
 	}
