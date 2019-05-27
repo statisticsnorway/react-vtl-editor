@@ -27,7 +27,7 @@
 	"scripts": {
 		"test": "cross-env NODE_PATH=src/ jest",
 		"test-watch": "cross-env NODE_PATH=src/ jest --watchAll",
-		"test-coverage": "cross-env NODE_PATH=src/ jest --collectCoverage",
+		"test-coverage": "cross-env NODE_PATH=src/ jest --coverage --runInBand",
 		"start-storybook": "cross-env NODE_PATH=src/ start-storybook -p 9999",
 		"build-storybook": "cross-env NODE_PATH=src/ build-storybook -o built-storybook/storybook",
 		"build": "rollup -c rollup.config.js",
