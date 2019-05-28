@@ -36,5 +36,7 @@ stories.addWithJSX('Props', () => (
 		theme={select('Theme', themes, 'vs-dark')}
 		handleValue={handleValue}
 		handleValid={handleValid}
+		showLineNumbers={boolean('Show line numbers', false)}
+		showMinimap={boolean('Show minimap', false)}
 	/>
 ));

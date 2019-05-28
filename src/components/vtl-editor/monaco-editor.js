@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MonacoEditor from 'react-monaco-editor';
 
+const disableLineNumbers = {
+	lineNumbers: 'off',
+	glyphMargin: false,
+	folding: false,
+	// Undocumented see https://github.com/Microsoft/vscode/issues/30795#issuecomment-410998882
+	lineDecorationsWidth: 0,
+	lineNumbersMinChars: 0,
+};
+
 class VtlEditor extends Component {
 	constructor(props) {
 		super(props);
@@ -36,18 +45,25 @@ class VtlEditor extends Component {
 
 	render() {
 		const { value } = this.state;
-		const { theme } = this.props;
+		const { theme, showMinimap, showLineNumbers } = this.props;
 		const options = {
 			selectOnLineNumbers: true,
+			minimap: {
+				enabled: showMinimap,
+			},
 		};
+		const customOptions = showLineNumbers
+			? options
+			: { ...options, ...disableLineNumbers };
 		return (
 			<div className="vtl-editor">
 				<MonacoEditor
+					width="100%"
 					height="400"
 					language="javascript"
 					theme={theme}
 					value={value}
-					options={options}
+					options={customOptions}
 					onChange={this.onChange}
 					editorDidMount={this.editorDidMount}
 				/>
@@ -60,12 +76,16 @@ VtlEditor.propTypes = {
 	value: PropTypes.string,
 	focus: PropTypes.bool,
 	theme: PropTypes.string,
+	showLineNumbers: PropTypes.bool,
+	showMinimap: PropTypes.bool,
 };
 
 VtlEditor.defaultProps = {
 	value: '',
 	focus: false,
 	theme: 'vs-dark',
+	showLineNumbers: false,
+	showMinimap: false,
 };
 
 export default VtlEditor;
