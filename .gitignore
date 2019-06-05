@@ -11,6 +11,5 @@ node_modules/
 # Built directories
 dist/
 lib/
-build/
 coverage/
 built-storybook/
