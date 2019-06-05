@@ -1,20 +1,22 @@
 const path = require('path');
+const webpack = require('webpack');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
+	mode: 'production',
 	entry: './src/components/index.js',
 	output: {
 		path: path.resolve(__dirname, 'lib'),
 		filename: 'index.js',
-		libraryTarget: 'commonjs',
+		libraryTarget: 'umd',
 	},
 	module: {
 		rules: [
 			{
 				test: /\.js$/,
 				include: path.resolve(__dirname, 'src'),
-				exclude: /(node_modules|bower_components|lib)/,
+				exclude: /(node_modules|lib)/,
 				use: {
 					loader: 'babel-loader',
 					options: {
@@ -30,26 +32,19 @@ module.exports = {
 		],
 	},
 	externals: {
-		react: 'commonjs react',
+		react: 'react',
 	},
 	node: { module: 'empty', net: 'empty', fs: 'empty' },
 	plugins: [
 		new MonacoWebpackPlugin({
 			languages: ['javascript'],
 		}),
-		new UglifyJSPlugin({
-			uglifyOptions: {
-				compress: {
-					conditionals: true,
-					unused: true,
-					comparisons: true,
-					sequences: true,
-					dead_code: true,
-					evaluate: true,
-					if_return: true,
-					join_vars: true,
-				},
-			},
+		new webpack.DefinePlugin({
+			'process.env.NODE_ENV': '"production"',
 		}),
 	],
+	optimization: {
+		minimize: true,
+		minimizer: [new UglifyJsPlugin()],
+	},
 };
