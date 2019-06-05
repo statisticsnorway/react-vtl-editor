@@ -1,10 +1,11 @@
 const path = require('path');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
 	entry: './src/components/index.js',
 	output: {
-		path: path.resolve(__dirname, 'lib'),
+		path: path.resolve(__dirname, 'build'),
 		filename: 'index.js',
 		libraryTarget: 'commonjs',
 	},
@@ -31,10 +32,25 @@ module.exports = {
 	externals: {
 		react: 'commonjs react',
 	},
-	node: { fs: 'empty' },
+	node: { module: 'empty', net: 'empty', fs: 'empty' },
 	plugins: [
 		new MonacoWebpackPlugin({
 			languages: ['javascript'],
+		}),
+		new UglifyJSPlugin({
+			uglifyOptions: {
+				compress: {
+					warnings: false,
+					conditionals: true,
+					unused: true,
+					comparisons: true,
+					sequences: true,
+					dead_code: true,
+					evaluate: true,
+					if_return: true,
+					join_vars: true,
+				},
+			},
 		}),
 	],
 };
