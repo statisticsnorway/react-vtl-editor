@@ -4,9 +4,9 @@ const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 module.exports = {
 	entry: './src/components/index.js',
 	output: {
-		path: path.resolve(__dirname, 'build'),
+		path: path.resolve(__dirname, 'lib'),
 		filename: 'index.js',
-		libraryTarget: 'commonjs2',
+		libraryTarget: 'commonjs',
 	},
 	module: {
 		rules: [
