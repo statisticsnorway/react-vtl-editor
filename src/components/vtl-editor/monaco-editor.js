@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MonacoEditor from 'react-monaco-editor';
 
+require('monaco-editor/esm/vs/editor/editor.all');
+
 const disableLineNumbers = {
 	lineNumbers: 'off',
 	glyphMargin: false,
