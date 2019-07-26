@@ -34,8 +34,6 @@ export default MyComponent;
 
 In order to avoid some errors with the React library and your React application (two versions of React loaded by browser), you should not use the `npm link` command. You should prefer the `npm pack` command. You should have a look to [this blog](https://medium.com/@vcarl/problems-with-npm-link-and-an-alternative-4dbdd3e66811) post for more informations.
 
-
 ## Todo
 
-- update `Rollup` configuration to display tooltip (https://github.com/react-monaco-editor/react-monaco-editor/issues/210)
 - work on UI customization of the component
