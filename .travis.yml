@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - 10.11.0
+  - 10.16.0
 cache: yarn
 install:
   - yarn
@@ -11,4 +11,4 @@ script:
 
 after_script:
   # - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
-  - bash scripts/gitbook.sh
+  - bash scripts/deploy.sh

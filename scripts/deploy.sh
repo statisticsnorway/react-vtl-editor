@@ -4,6 +4,7 @@ set -e
 
 DOC_FOLDER="docs"
 STORYBOOK_FOLDER="built-storybook"
+EXAMPLE_FOLDER="example"
 SITE_FOLDER="website"
 
 MAIN_BRANCH="master"
@@ -36,6 +37,13 @@ function buildStoryBook(){
   npm run build-storybook
 }
 
+function buildExample(){
+  cd example
+  npm install
+  npm run build
+  cd ..
+}
+
 function publish() {
   if [ -d "$SITE_FOLDER" ]; then rm -Rf $SITE_FOLDER; fi
 
@@ -44,6 +52,8 @@ function publish() {
 
   cp -a "../$DOC_FOLDER/_book/." .
   cp -R "../$STORYBOOK_FOLDER/." .
+  cp -R "../$EXAMPLE_FOLDER/." .
+  mv "build" "example"
 
   git init
   git remote add upstream "$UPSTREAM"
@@ -57,7 +67,7 @@ function publish() {
 }
 
 function main() {
-  setup && buildDocumentation && buildStoryBook && publish
+  setup && buildDocumentation && buildStoryBook && buildExample && publish
 }
 
 main

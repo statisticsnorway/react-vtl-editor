@@ -30,6 +30,8 @@ const MyComponent = () => {
 export default MyComponent;
 ```
 
+An [example](https://github.com/statisticsnorway/react-vtl-editor/tree/master/example) of use of Lunatic is available. This simple orchestrator is deployed [online](https://statisticsnorway.github.io/react-vtl-editor/example).
+
 ## How to improve the library locally
 
 In order to avoid some errors with the React library and your React application (two versions of React loaded by browser), you should not use the `npm link` command. You should prefer the `npm pack` command. You should have a look to [this blog](https://medium.com/@vcarl/problems-with-npm-link-and-an-alternative-4dbdd3e66811) post for more informations.
